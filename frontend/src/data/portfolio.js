@@ -28,8 +28,8 @@ export const socialLinks = [
 ];
 
 export const contactInfo = {
-    email: "contact@example.com",
-    phone: "+224 620 00 00 00",
+    email: "augustinkolie54@gmail.com",
+    phone: "610 85 00 29",
     address: "N'Zérékoré (Boma), Guinée",
     availability: {
         fr: "Disponible pour de nouveaux projets",

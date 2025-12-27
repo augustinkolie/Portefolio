@@ -136,7 +136,7 @@ const Contact = () => {
                                     name="user_email"
                                     required
                                     className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                    placeholder="john@example.com"
+                                    placeholder="augustinkolie54@gmail.com"
                                 />
                             </div>
 
