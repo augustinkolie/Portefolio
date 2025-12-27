@@ -60,7 +60,7 @@ const BlogModal = ({ post, isOpen, onClose, language }) => (
                                 <User size={24} />
                             </div>
                             <div>
-                                <p className="font-bold text-gray-800 dark:text-gray-200">John Doe</p>
+                                <p className="font-bold text-gray-800 dark:text-gray-200">Augustin Kolié</p>
                                 <p className="text-sm text-gray-500">Full Stack Developer</p>
                             </div>
                         </div>

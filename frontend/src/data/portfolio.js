@@ -1,7 +1,7 @@
 
 export const bioData = {
     fr: {
-        name: "John Doe",
+        name: "Augustin Kolié",
         title: "Développeur Full Stack & Créatif",
         description: "Je conçois des expériences web modernes, performantes et accessibles. Passionné par l'innovation et le design épuré.",
         about: "Développeur passionné avec plus de 5 ans d'expérience dans la création d'applications web. J'aime transformer des idées complexes en interfaces simples et intuitives.",
@@ -10,13 +10,30 @@ export const bioData = {
         education: "Éducation"
     },
     en: {
-        name: "John Doe",
+        name: "Augustin Kolié",
         title: "Creative Full Stack Developer",
         description: "I craft beautiful, accessible, and performant web experiences using modern technologies. Passionate about innovation and clean design.",
         about: "Passionate developer with over 5 years of experience in building web applications. I love turning complex ideas into simple, intuitive interfaces.",
         cta: "Download CV",
         contact: "Contact Me",
         education: "Education"
+    }
+};
+
+export const socialLinks = [
+    { name: "GitHub", icon: "Github", url: "https://github.com" },
+    { name: "LinkedIn", icon: "Linkedin", url: "https://linkedin.com" },
+    { name: "Twitter", icon: "Twitter", url: "https://twitter.com" },
+    { name: "Instagram", icon: "Instagram", url: "https://instagram.com" }
+];
+
+export const contactInfo = {
+    email: "contact@example.com",
+    phone: "+224 620 00 00 00",
+    address: "N'Zérékoré (Boma), Guinée",
+    availability: {
+        fr: "Disponible pour de nouveaux projets",
+        en: "Available for new projects"
     }
 };
 

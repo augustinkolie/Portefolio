@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, MapPin, Mail, Phone } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
-import { bioData } from '../../data/portfolio';
+import { bioData, contactInfo } from '../../data/portfolio';
 import { submitContactForm } from '../../services/api';
 
 const Contact = () => {
@@ -13,6 +13,7 @@ const Contact = () => {
 
     const sendEmail = async (e) => {
         e.preventDefault();
+        console.log('Form submission started');
         setStatus('sending');
         setErrorMessage('');
 
@@ -27,20 +28,25 @@ const Contact = () => {
         };
 
         try {
-            await submitContactForm(data);
+            console.log('Submitting data:', data);
+            const result = await submitContactForm(data);
+            console.log('Submission result:', result);
             setStatus('success');
             e.target.reset();
 
             // Reset success message after 5 seconds
             setTimeout(() => setStatus(''), 5000);
         } catch (error) {
+            console.error('Submission catch block:', error);
             setStatus('error');
             setErrorMessage(error.message || 'Une erreur est survenue. Veuillez réessayer.');
 
             // Reset error message after 5 seconds
             setTimeout(() => {
-                setStatus('');
-                setErrorMessage('');
+                if (status === 'error') {
+                    setStatus('');
+                    setErrorMessage('');
+                }
             }, 5000);
         }
     };
@@ -70,7 +76,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-bold">Email</h4>
-                                    <p className="text-gray-600 dark:text-gray-400">contact@example.com</p>
+                                    <p className="text-gray-600 dark:text-gray-400">{contactInfo.email}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
@@ -79,7 +85,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-bold">{language === 'fr' ? 'Téléphone' : 'Phone'}</h4>
-                                    <p className="text-gray-600 dark:text-gray-400">+224 620 00 00 00</p>
+                                    <p className="text-gray-600 dark:text-gray-400">{contactInfo.phone}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
@@ -88,7 +94,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-bold">{language === 'fr' ? 'Adresse' : 'Location'}</h4>
-                                    <p className="text-gray-600 dark:text-gray-400">N'Zérékoré (Boma), Guinée</p>
+                                    <p className="text-gray-600 dark:text-gray-400">{contactInfo.address}</p>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +126,7 @@ const Contact = () => {
                                     name="user_name"
                                     required
                                     className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                    placeholder="John Doe"
+                                    placeholder="Augustin Kolié"
                                 />
                             </div>
                             <div>
