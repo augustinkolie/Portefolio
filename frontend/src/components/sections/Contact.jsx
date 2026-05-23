@@ -26,6 +26,14 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Vérification simple côté client
+        if (!formData.firstName.trim() || !formData.email.trim() || !formData.message.trim()) {
+            setStatus('error');
+            setErrorMsg(language === 'fr' ? 'Veuillez remplir au moins le prénom, l\'email et le message.' : 'Please fill in at least first name, email and message.');
+            return;
+        }
+
         setStatus('loading');
         setErrorMsg('');
 

@@ -5,6 +5,16 @@ export const submitContact = async (req, res) => {
     try {
         const { name, email, phone, subject, message } = req.body;
 
+        if (!name || name.trim() === "") {
+            return res.status(400).json({ success: false, message: 'Le nom est obligatoire.' });
+        }
+        if (!email || email.trim() === "") {
+            return res.status(400).json({ success: false, message: 'L\'email est obligatoire.' });
+        }
+        if (!message || message.trim() === "") {
+            return res.status(400).json({ success: false, message: 'Le message est obligatoire.' });
+        }
+
         // 1. Sauvegarde en base PostgreSQL
         const contact = await Contact.create({ name, email, phone, subject, message });
 
