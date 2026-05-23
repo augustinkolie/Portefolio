@@ -30,7 +30,10 @@ const Contact = () => {
         setErrorMsg('');
 
         try {
-            const res = await fetch('http://localhost:5000/api/contact', {
+            // URL de l'API (Render en production, localhost en développement)
+            const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-backend-eryl.onrender.com';
+            
+            const res = await fetch(`${API_BASE_URL}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
