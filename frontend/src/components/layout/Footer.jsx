@@ -34,10 +34,8 @@ const Footer = () => {
                         className="space-y-6"
                     >
                         <div className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-gradient-to-tr from-orange-400 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
-                                <span className="text-xl font-bold">P</span>
-                            </div>
-                            <span className="text-2xl font-bold text-white tracking-tight">Portfolio<span className="text-orange-500">.</span></span>
+                            <span className="text-4xl" style={{ fontFamily: "'Great Vibes', cursive", color: '#f97316' }}>P</span>
+                            <span className="text-2xl font-bold text-white tracking-tight">ortfolio<span style={{ color: '#f97316' }}>.</span></span>
                         </div>
                         <p className="text-gray-400 leading-relaxed max-w-xs">
                             {bio.description}
@@ -145,7 +143,11 @@ const Footer = () => {
                         <a href="#" className="hover:text-white transition-colors">{language === 'fr' ? 'Confidentialité' : 'Privacy Policy'}</a>
                         <a href="#" className="hover:text-white transition-colors">{language === 'fr' ? 'Conditions' : 'Terms of Service'}</a>
                         <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-lg border border-white/10">
-                            <Globe size={14} className="text-orange-500" />
+                            {language === 'fr' ? (
+                                <img src="https://flagcdn.com/w40/fr.png" alt="FR" className="w-4 h-4 rounded-full object-cover" />
+                            ) : (
+                                <img src="https://flagcdn.com/w40/gb.png" alt="EN" className="w-4 h-4 rounded-full object-cover" />
+                            )}
                             <span className="text-white font-medium uppercase tracking-tighter">{language}</span>
                         </div>
                     </div>

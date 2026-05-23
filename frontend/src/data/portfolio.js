@@ -4,7 +4,7 @@ export const bioData = {
         name: "Augustin Kolié",
         title: "Développeur Full Stack & Créatif",
         description: "Je conçois des expériences web modernes, performantes et accessibles. Passionné par l'innovation et le design épuré.",
-        about: "Développeur passionné avec plus de 5 ans d'expérience dans la création d'applications web. J'aime transformer des idées complexes en interfaces simples et intuitives.",
+        about: "Développeur passionné avec plus de 3 ans d'expérience dans la création d'applications web. J'aime transformer des idées complexes en interfaces simples et intuitives.",
         cta: "Télécharger CV",
         contact: "Me Contacter",
         education: "Éducation"
@@ -111,7 +111,7 @@ export const statsData = [
         icon: "CheckCircle" 
     },
     { 
-        value: "Plus de 15", 
+        value: "Plus de 6", 
         unit: "Projets",
         label: { fr: "Nous avons terminé", en: "We have completed" }, 
         icon: "FolderCode" 
@@ -293,20 +293,26 @@ export const projectsData = [
     },
     {
         id: 2,
-        title: "Social Media App",
-        description: { fr: "Application sociale avec messagerie instantanée.", en: "Social app with instant messaging." },
-        tech: ["Next.js", "Socket.io", "MongoDB"],
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-        links: { demo: "#", repo: "#" },
+        title: "EcoWatch - Qualité de l'Air",
+        description: { 
+            fr: "Application de surveillance environnementale permettant de détecter et d'analyser la qualité de l'air en temps réel.", 
+            en: "Environmental monitoring application designed to detect and analyze air quality in real-time." 
+        },
+        tech: ["Django", "HTML", "CSS", "Python"],
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800",
+        links: { demo: "#", repo: "https://github.com/augustinkolie/groupe4" },
         caseStudy: true
     },
     {
         id: 3,
-        title: "Portfolio V1",
-        description: { fr: "Mon premier portfolio en HTML/CSS.", en: "My first portfolio in HTML/CSS." },
-        tech: ["HTML", "SASS", "JS"],
-        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800",
-        links: { demo: "#", repo: "#" }
+        title: "DME - Dossier Médical Électronique",
+        description: { 
+            fr: "Système de numérisation et de gestion des dossiers médicaux pour les centres de santé en Guinée.", 
+            en: "Digitalization and management system for medical records in Guinea's healthcare centers." 
+        },
+        tech: ["Nest.js", "Next.js", "PostgreSQL", "Tailwind CSS"],
+        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
+        links: { demo: "#", repo: "https://github.com/bakarydiakite/DME-GUINEE" }
     },
     {
         id: 4,
@@ -317,7 +323,7 @@ export const projectsData = [
         },
         tech: ["React", "Node.js", "PostgreSQL", "WebRTC"],
         image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
-        links: { demo: "#", repo: "#" }
+        links: { demo: "#", repo: "https://github.com/augustinkolie/guineelearnfrontend" }
     },
     {
         id: 5,
@@ -328,7 +334,7 @@ export const projectsData = [
         },
         tech: ["Next.js", "Stripe", "Firebase", "Google Maps"],
         image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800",
-        links: { demo: "#", repo: "#" }
+        links: { demo: "#", repo: "https://github.com/augustinkolie/frontend_cuniresto" }
     },
     {
         id: 6,
@@ -339,7 +345,7 @@ export const projectsData = [
         },
         tech: ["React", "Express", "MongoDB", "Stripe"],
         image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800",
-        links: { demo: "#", repo: "#" }
+        links: { demo: "#", repo: "https://github.com/augustinkolie/e-commerce" }
     }
 ];
 

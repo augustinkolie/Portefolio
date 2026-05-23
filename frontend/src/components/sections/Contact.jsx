@@ -1,59 +1,67 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Mail, Phone } from 'lucide-react';
+import { Mail, Send } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
-import { bioData, contactInfo } from '../../data/portfolio';
-import { submitContactForm } from '../../services/api';
+import { contactInfo } from '../../data/portfolio';
+
+const INITIAL_FORM = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    phone: '',
+    helpType: '',
+    message: ''
+};
 
 const Contact = () => {
     const { language } = useLanguage();
-    const formRef = useRef();
-    const [status, setStatus] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [formData, setFormData] = useState(INITIAL_FORM);
+    const [status, setStatus] = useState('idle'); // idle | loading | success | error
+    const [errorMsg, setErrorMsg] = useState('');
 
-    const sendEmail = async (e) => {
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submission started');
-        setStatus('sending');
-        setErrorMessage('');
-
-        // Get form data
-        const formData = new FormData(e.target);
-        const data = {
-            name: formData.get('user_name'),
-            email: formData.get('user_email'),
-            phone: formData.get('user_phone'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-        };
+        setStatus('loading');
+        setErrorMsg('');
 
         try {
-            console.log('Submitting data:', data);
-            const result = await submitContactForm(data);
-            console.log('Submission result:', result);
+            const res = await fetch('http://localhost:5000/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: `${formData.firstName} ${formData.lastName}`.trim(),
+                    email: formData.email,
+                    phone: formData.phone,
+                    subject: formData.helpType || 'Contact depuis le portfolio',
+                    message: formData.message,
+                })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.message || 'Erreur serveur');
+
+            // ✅ Succès : vider tous les champs
+            setFormData(INITIAL_FORM);
             setStatus('success');
-            e.target.reset();
 
-            // Reset success message after 5 seconds
-            setTimeout(() => setStatus(''), 5000);
-        } catch (error) {
-            console.error('Submission catch block:', error);
+            // Revenir à l'état normal après 4 secondes
+            setTimeout(() => setStatus('idle'), 4000);
+
+        } catch (err) {
+            setErrorMsg(err.message);
             setStatus('error');
-            setErrorMessage(error.message || 'Une erreur est survenue. Veuillez réessayer.');
-
-            // Reset error message after 5 seconds
-            setTimeout(() => {
-                if (status === 'error') {
-                    setStatus('');
-                    setErrorMessage('');
-                }
-            }, 5000);
         }
     };
 
     return (
-        <section id="contact" className="relative py-24 overflow-hidden">
-            {/* Split Background as in Image 2 */}
+        <section id="contact" className="relative py-20 overflow-hidden">
+            {/* Split Background */}
             <div className="absolute top-0 left-0 w-full h-1/3 bg-gray-800 dark:bg-gray-900 z-0"></div>
             <div className="absolute bottom-0 left-0 w-full h-2/3 bg-black z-0"></div>
             
@@ -87,128 +95,180 @@ const Contact = () => {
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
                                 {[
-                                    { fr: "orienté client", en: "client oriented" },
-                                    { fr: "Axé sur les résultats", en: "result oriented" },
-                                    { fr: "Indépendant", en: "independent" },
-                                    { fr: "Résolution de problèmes", en: "problem solving" },
-                                    { fr: "Compétent", en: "competent" },
-                                    { fr: "Transparent", en: "transparent" }
+                                    language === 'fr' ? 'Orienté client' : 'Customer Oriented',
+                                    language === 'fr' ? 'Axé sur les résultats' : 'Results Driven',
+                                    language === 'fr' ? 'Indépendant' : 'Independent',
+                                    language === 'fr' ? 'Résolution de problèmes' : 'Problem Solving',
+                                    language === 'fr' ? 'Compétent' : 'Competent',
+                                    language === 'fr' ? 'Transparent' : 'Transparent'
                                 ].map((adv, i) => (
                                     <div key={i} className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full border-2 border-red-500 flex items-center justify-center">
-                                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                                        </div>
-                                        <span className="text-lg text-gray-200 capitalize">{adv[language]}</span>
+                                        <div className="w-2 h-2 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
+                                        <span className="text-gray-200 font-medium">{adv}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* Right Side - Floating Form Card */}
+                    {/* Right Side - Floating Card */}
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white rounded-lg shadow-2xl p-8 md:p-12"
+                        className="bg-white rounded-xl p-6 md:p-12 shadow-2xl relative z-10 w-full"
                     >
                         <div className="text-center mb-10">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                            <div className="flex justify-center text-gray-400 mb-4">
+                                <Mail size={48} className="drop-shadow-sm" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900">
                                 {language === 'fr' ? 'Contactez-nous' : 'Contact Us'}
                             </h3>
-                            <div className="flex justify-center">
-                                <Mail className="text-gray-400" size={32} />
-                            </div>
                         </div>
 
-                        <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Prénom' : 'First Name'}</label>
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                        {language === 'fr' ? 'Prénom' : 'First Name'}
+                                    </label>
                                     <input
                                         type="text"
-                                        name="user_name"
-                                        required
-                                        className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900"
+                                        onChange={handleChange}
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Nom de famille' : 'Last Name'}</label>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                        {language === 'fr' ? 'Nom de famille' : 'Last Name'}
+                                    </label>
                                     <input
                                         type="text"
-                                        name="last_name"
-                                        required
-                                        className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900"
+                                        onChange={handleChange}
                                     />
                                 </div>
                             </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Entreprise / Organisation' : 'Company / Organization'}</label>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                    {language === 'fr' ? 'E-mail professionnel' : 'Work Email'}
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900"
+                                    onChange={handleChange}
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                    {language === 'fr' ? 'Entreprise / Organisation' : 'Company / Organization'}
+                                </label>
                                 <input
                                     type="text"
                                     name="company"
-                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
+                                    value={formData.company}
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900"
+                                    onChange={handleChange}
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">E-mail</label>
-                                <input
-                                    type="email"
-                                    name="user_email"
-                                    required
-                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
-                                />
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                    {language === 'fr' ? 'Téléphone' : 'Phone Number'}
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span className="flex items-center gap-2 text-gray-500 font-bold border-r border-gray-200 pr-3 mr-1 text-sm">
+                                            <div className="w-6 h-4 flex shadow-sm rounded-sm overflow-hidden">
+                                                <div className="w-1/3 bg-[#CE1126]"></div>
+                                                <div className="w-1/3 bg-[#FCD116]"></div>
+                                                <div className="w-1/3 bg-[#009460]"></div>
+                                            </div>
+                                            <span>+224</span>
+                                        </span>
+                                    </div>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={formData.phone}
+                                        placeholder="610 00 00 00"
+                                        className="w-full pl-24 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900"
+                                        onChange={handleChange}
+                                    />
+                                </div>
                             </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Téléphone' : 'Phone'}</label>
-                                <input
-                                    type="tel"
-                                    name="user_phone"
-                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Comment pouvons-nous vous aider ?' : 'How can we help you?'}</label>
-                                <select 
-                                    name="help_type"
-                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800 bg-white"
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                    {language === 'fr' ? 'Comment pouvons-nous vous aider ?' : 'How can we help you?'}
+                                </label>
+                                <select
+                                    name="helpType"
+                                    value={formData.helpType}
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900 appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1em_1em]"
+                                    onChange={handleChange}
                                 >
                                     <option value="">{language === 'fr' ? 'Sélectionnez une option' : 'Select an option'}</option>
-                                    <option value="dev">{language === 'fr' ? 'Développement Web' : 'Web Development'}</option>
-                                    <option value="consult">{language === 'fr' ? 'Consultation Tech' : 'Tech Consultation'}</option>
-                                    <option value="other">{language === 'fr' ? 'Autre' : 'Other'}</option>
+                                    <option value="dev">{language === 'fr' ? 'Développement' : 'Development'}</option>
+                                    <option value="design">{language === 'fr' ? 'Design' : 'Design'}</option>
+                                    <option value="consulting">{language === 'fr' ? 'Consulting' : 'Consulting'}</option>
                                 </select>
                             </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Message</label>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                    {language === 'fr' ? 'Message' : 'Message'}
+                                </label>
                                 <textarea
                                     name="message"
-                                    required
                                     rows="4"
-                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800 resize-none"
-                                    placeholder={language === 'fr' ? "Pour mieux vous aider, veuillez décrire comment nous pouvons vous aider..." : "To better help you, please describe how we can help you..."}
+                                    value={formData.message}
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:ring-2 focus:ring-red-600 outline-none transition-all text-gray-900 resize-none"
+                                    onChange={handleChange}
                                 ></textarea>
                             </div>
 
-                            <button
-                                type="submit"
-                                disabled={status === 'sending'}
-                                className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded shadow-lg transition-all disabled:opacity-70"
-                            >
-                                {status === 'sending' ? (language === 'fr' ? 'ENVOI EN COURS...' : 'SENDING...') : (language === 'fr' ? 'ENVOYER' : 'SEND')}
-                            </button>
-
-                            {status === 'success' && (
-                                <p className="text-green-600 text-center font-bold">{language === 'fr' ? '✓ Message envoyé !' : '✓ Message sent!'}</p>
-                            )}
-                            {status === 'error' && (
-                                <p className="text-red-600 text-center font-bold">{errorMessage}</p>
-                            )}
+                            <div className="pt-4 space-y-3">
+                                {status === 'success' && (
+                                    <div className="w-full py-4 bg-green-50 border border-green-200 text-green-700 rounded-lg font-semibold text-sm text-center">
+                                        ✅ {language === 'fr' ? 'Message envoyé avec succès !' : 'Message sent successfully!'}
+                                    </div>
+                                )}
+                                {status === 'error' && (
+                                    <div className="w-full py-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm text-center">
+                                        ⚠️ {errorMsg || (language === 'fr' ? 'Une erreur est survenue.' : 'An error occurred.')}
+                                    </div>
+                                )}
+                                <button
+                                    type="submit"
+                                    disabled={status === 'loading'}
+                                    className="w-full py-4 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-lg font-bold text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:cursor-not-allowed"
+                                >
+                                    {status === 'loading' ? (
+                                        <>
+                                            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                                            </svg>
+                                            {language === 'fr' ? 'Envoi en cours...' : 'Sending...'}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send size={18} />
+                                            {language === 'fr' ? 'Envoyer' : 'Send'}
+                                        </>
+                                    )}
+                                </button>
+                            </div>
                         </form>
                     </motion.div>
                 </div>

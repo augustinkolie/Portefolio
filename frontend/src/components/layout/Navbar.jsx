@@ -10,6 +10,7 @@ const Navbar = () => {
     const { theme, toggleTheme } = useTheme();
     const { language, switchLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
+    const [isLangOpen, setIsLangOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -42,14 +43,15 @@ const Navbar = () => {
             )}
         >
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-orange-500/20 group-hover:scale-110 transition-transform duration-300">
-                        P
-                    </div>
-                    <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-                        Portfolio.
-                    </span>
-                </Link>
+                <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    <h1 className={cn(
+                        "text-2xl font-bold tracking-tight transition-colors",
+                        scrolled ? "text-gray-900 dark:text-white" : "text-white"
+                    )}>
+                        <span className="text-4xl" style={{ fontFamily: "'Great Vibes', cursive", color: '#f97316' }}>P</span>
+                        <span className="font-bold">ortfolio<span className="text-primary">.</span></span>
+                    </h1>
+                </div>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-8">
@@ -86,19 +88,78 @@ const Navbar = () => {
                         >
                             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
-                        <button
-                            onClick={() => switchLanguage(language === "fr" ? "en" : "fr")}
-                            className={cn(
-                                "flex items-center gap-2 px-3 py-1.5 rounded-full transition-all border",
-                                scrolled
-                                    ? "text-gray-700 border-gray-200 hover:bg-gray-100 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-800"
-                                    : "text-white border-white/20 hover:bg-white/10"
-                            )}
-                            title={language === "fr" ? "Passer en Anglais" : "Switch to French"}
-                        >
-                            <Globe size={16} />
-                            <span className="text-xs font-bold uppercase tracking-wider">{language}</span>
-                        </button>
+                        <div className="relative group lg:block hidden">
+                            <button
+                                onClick={() => setIsLangOpen(!isLangOpen)}
+                                className={cn(
+                                    "flex items-center gap-3 px-4 py-2 rounded-full transition-all border shadow-sm hover:shadow-md",
+                                    scrolled
+                                        ? "text-gray-700 border-gray-200 bg-white/50 hover:bg-gray-50 dark:text-gray-300 dark:border-gray-700 dark:bg-gray-800/50"
+                                        : "text-white border-white/30 bg-white/10 hover:bg-white/20 backdrop-blur-sm"
+                                )}
+                            >
+                                {language === 'fr' ? (
+                                    <img src="https://flagcdn.com/w40/fr.png" alt="FR" className="w-5 h-5 rounded-full object-cover shadow-sm" />
+                                ) : (
+                                    <img src="https://flagcdn.com/w40/gb.png" alt="EN" className="w-5 h-5 rounded-full object-cover shadow-sm" />
+                                )}
+                                <span className="text-sm font-bold uppercase tracking-wider">{language}</span>
+                                <motion.div
+                                    animate={{ rotate: isLangOpen ? 180 : 0 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </motion.div>
+                            </button>
+
+                            <AnimatePresence>
+                                {isLangOpen && (
+                                    <>
+                                        {/* Invisible backdrop to close on click outside */}
+                                        <div 
+                                            className="fixed inset-0 z-0" 
+                                            onClick={() => setIsLangOpen(false)}
+                                        ></div>
+                                        
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            className="absolute right-0 mt-3 w-40 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden z-50 p-1.5"
+                                        >
+                                            <button
+                                                onClick={() => {
+                                                    switchLanguage("fr");
+                                                    setIsLangOpen(false);
+                                                }}
+                                                className={cn(
+                                                    "w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-left",
+                                                    language === "fr" ? "bg-primary/10 text-primary font-bold" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                                                )}
+                                            >
+                                                <img src="https://flagcdn.com/w40/fr.png" alt="FR" className="w-5 h-5 rounded-full object-cover" />
+                                                <span className="text-sm">Français</span>
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    switchLanguage("en");
+                                                    setIsLangOpen(false);
+                                                }}
+                                                className={cn(
+                                                    "w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-left",
+                                                    language === "en" ? "bg-primary/10 text-primary font-bold" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                                                )}
+                                            >
+                                                <img src="https://flagcdn.com/w40/gb.png" alt="EN" className="w-5 h-5 rounded-full object-cover" />
+                                                <span className="text-sm">English</span>
+                                            </button>
+                                        </motion.div>
+                                    </>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </div>
 
@@ -158,7 +219,11 @@ const Navbar = () => {
                                 }}
                                 className="flex items-center gap-3 text-lg font-bold text-primary"
                             >
-                                <Globe size={20} />
+                                {language === 'fr' ? (
+                                    <img src="https://flagcdn.com/w40/gb.png" alt="EN" className="w-6 h-6 rounded-full object-cover" />
+                                ) : (
+                                    <img src="https://flagcdn.com/w40/fr.png" alt="FR" className="w-6 h-6 rounded-full object-cover" />
+                                )}
                                 <span>{language === "fr" ? "Switch to English" : "Passer en Français"}</span>
                             </button>
                         </div>
