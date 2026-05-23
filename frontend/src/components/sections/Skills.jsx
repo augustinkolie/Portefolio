@@ -9,7 +9,7 @@ const SkillCard = ({ skill, index }) => (
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ delay: index * 0.05 }}
-        className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
+        className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
     >
         <div className="flex justify-between items-center mb-2">
             <span className="font-semibold text-gray-700 dark:text-gray-300">{skill.name}</span>
@@ -34,7 +34,7 @@ const Skills = () => {
 
     return (
         <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-800/50">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-gray-200">
                         {language === 'fr' ? 'Compétences' : 'Skills'}

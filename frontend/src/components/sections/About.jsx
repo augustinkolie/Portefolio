@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { Code2, Coffee, Zap, Target, Award, Briefcase, GraduationCap, Heart } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { bioData, languageSkills, hobbiesData } from '../../data/portfolio';
-import aboutImg from '../../assets/images/about-dev.png';
+import aboutImg from '../../assets/images/about-professional.png';
+import ClipPaths from '../ui/ClipPaths';
 
 const About = () => {
     const { language } = useLanguage();
@@ -40,72 +41,55 @@ const About = () => {
 
     return (
         <section id="about" className="py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
-            <div className="container mx-auto px-6">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm mb-2 block">
-                        {language === 'fr' ? 'Découvrez-moi' : 'Get To Know Me'}
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-gray-200">
-                        {language === 'fr' ? 'À propos de moi' : 'About Me'}
-                    </h2>
-                    <div className="w-24 h-1.5 bg-gradient-to-r from-orange-400 to-orange-600 mx-auto rounded-full"></div>
-                </motion.div>
+            <ClipPaths />
+            <div className="container mx-auto">
 
-                {/* Main Content Grid */}
-                <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-                    {/* Left Side - Coding Illustration */}
+
+                {/* Main Content Grid - Swapped Order */}
+                <div className="grid md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+                    {/* Left Side - Content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="relative order-2 md:order-1"
+                        className="space-y-10 order-1"
                     >
-                        <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
-                            {/* Development Workspace Image */}
-                            <img
-                                src={aboutImg}
-                                alt="Web Development Workspace"
-                                className="w-full h-full object-cover rounded-3xl transform group-hover:scale-105 transition-transform duration-700"
-                            />
-
-                            {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-3xl"></div>
-
-                            {/* Floating Elements */}
-                            <div className="absolute -top-4 -right-4 w-20 h-20 bg-orange-500 rounded-full opacity-20 blur-2xl"></div>
-                            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-purple-500 rounded-full opacity-20 blur-2xl"></div>
-                        </div>
-                    </motion.div>
-
-                    {/* Right Side - Content */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-8 order-1 md:order-2"
-                    >
-                        {/* Bio Text */}
                         <div>
-                            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm mb-4 block">
+                                {language === 'fr' ? 'Découvrez-moi' : 'Get To Know Me'}
+                            </span>
+                            <h2 className="text-4xl md:text-6xl font-black mb-8 text-gray-900 dark:text-gray-100 leading-tight">
+                                {language === 'fr' ? 'Passionné par le Développement Web & l\'Innovation' : 'Passionate about Web Development & Innovation'}
+                            </h2>
+                            <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
                                 {content.about}
                             </p>
-                            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                                 {language === 'fr'
                                     ? "Actuellement étudiant en informatique à l'Université de Labé, je combine apprentissage académique et projets pratiques pour développer mes compétences en développement web full-stack."
                                     : "Currently studying Computer Science at the University of Labé, I combine academic learning with practical projects to develop my full-stack web development skills."}
                             </p>
                         </div>
 
-                        {/* Highlights Grid */}
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* Action Buttons as in Image 2 */}
+                        <div className="flex flex-wrap gap-4 pt-4">
+                            <a 
+                                href="#contact" 
+                                className="px-8 py-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-colors shadow-lg shadow-red-500/20"
+                            >
+                                {language === 'fr' ? 'Planifier une consultation' : 'Schedule a consultation'}
+                            </a>
+                            <a 
+                                href="#services" 
+                                className="px-8 py-4 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 text-white font-bold rounded-lg transition-colors"
+                            >
+                                {language === 'fr' ? 'Mes Services' : 'My Services'}
+                            </a>
+                        </div>
+
+                        {/* Highlights Grid - Slightly restyled for the new layout */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {highlights.map((item, index) => (
                                 <motion.div
                                     key={index}
@@ -113,10 +97,10 @@ const About = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="group p-4 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10"
+                                    className="group p-4 bg-white dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10"
                                 >
                                     <div className="flex items-start gap-3">
-                                        <div className="p-2 bg-orange-500/10 rounded-lg group-hover:bg-orange-500 transition-colors">
+                                        <div className="p-2 bg-orange-500/10 rounded-lg group-hover:bg-orange-500 transition-colors shrink-0">
                                             <item.icon className="w-5 h-5 text-orange-500 group-hover:text-white transition-colors" />
                                         </div>
                                         <div>
@@ -127,29 +111,39 @@ const About = () => {
                                 </motion.div>
                             ))}
                         </div>
+                    </motion.div>
 
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                            {stats.map((stat, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="text-center"
-                                >
-                                    <div className="flex justify-center mb-2">
-                                        <div className="p-2 bg-orange-500/10 rounded-lg">
-                                            <stat.icon className="w-6 h-6 text-orange-500" />
-                                        </div>
-                                    </div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-1">{stat.value}</h3>
-                                    <p className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">{stat.label}</p>
-                                </motion.div>
-                            ))}
+                    {/* Right Side - Image with Side Curve */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="relative order-2"
+                    >
+                        <div className="relative group">
+                            <motion.div 
+                                className="relative z-10"
+                                style={{ 
+                                    clipPath: 'url(#parabolic-left)',
+                                }}
+                                whileHover={{ scale: 1.01 }}
+                                transition={{ duration: 0.4 }}
+                            >
+                                <img
+                                    src={aboutImg}
+                                    alt="Web Development Workspace"
+                                    className="w-full h-full object-cover min-h-[500px]"
+                                />
+                                {/* Red accent border on the right */}
+                                <div className="absolute top-0 right-0 w-2 h-full bg-red-500 z-20"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent pointer-events-none"></div>
+                            </motion.div>
+
+                            {/* Decorative Elements */}
+                            <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-500/10 rounded-full blur-[100px]"></div>
+                            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-[100px]"></div>
                         </div>
-
                     </motion.div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ const Projects = () => {
 
     return (
         <section id="projects" className="py-20 bg-gray-50 dark:bg-black/20">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -34,9 +34,9 @@ const Projects = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full"
+                            className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full"
                         >
-                            <div className="relative overflow-hidden h-48">
+                            <div className="relative overflow-hidden h-40">
                                 <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/5 transition-colors z-10"></div>
                                 <img
                                     src={project.image}
@@ -45,40 +45,40 @@ const Projects = () => {
                                 />
                             </div>
 
-                            <div className="p-6 flex-grow flex flex-col">
-                                <div className="flex flex-wrap gap-2 mb-4">
+                            <div className="p-4 flex-grow flex flex-col">
+                                <div className="flex flex-wrap gap-1.5 mb-3">
                                     {project.tech.map(t => (
-                                        <span key={t} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-full">
+                                        <span key={t} className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-[10px] font-medium rounded-full">
                                             {t}
                                         </span>
                                     ))}
                                 </div>
-                                <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100 group-hover:text-gray-600 transition-colors">
+                                <h3 className="text-lg font-bold mb-1.5 text-gray-800 dark:text-gray-100 group-hover:text-gray-600 transition-colors">
                                     {project.title}
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow">
+                                <p className="text-gray-600 dark:text-gray-400 text-xs mb-4 flex-grow line-clamp-2">
                                     {project.description[language]}
                                 </p>
 
-                                <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-100 dark:border-gray-700">
-                                    <div className="flex gap-4">
+                                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                                    <div className="flex gap-3">
                                         <a
                                             href={project.links.demo}
-                                            className="flex items-center gap-2 text-sm font-bold text-orange-500 hover:text-orange-600 transition-colors"
+                                            className="flex items-center gap-1.5 text-xs font-bold text-orange-500 hover:text-orange-600 transition-colors"
                                         >
-                                            <ExternalLink size={16} />
+                                            <ExternalLink size={14} />
                                             Demo
                                         </a>
                                         <a
                                             href={project.links.repo}
-                                            className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                                            className="flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
                                         >
-                                            <Github size={16} />
+                                            <Github size={14} />
                                             Code
                                         </a>
                                     </div>
                                     {project.caseStudy && (
-                                        <button className="text-xs font-bold text-orange-500 bg-orange-500/10 px-3 py-1.5 rounded-lg hover:bg-orange-500 hover:text-white transition-all">
+                                        <button className="text-[10px] font-bold text-orange-500 bg-orange-500/10 px-2 py-1 rounded-lg hover:bg-orange-500 hover:text-white transition-all">
                                             {language === 'fr' ? 'Case Study' : 'Case Study'}
                                         </button>
                                     )}

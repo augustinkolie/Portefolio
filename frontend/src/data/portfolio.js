@@ -85,6 +85,9 @@ export const skillsData = [
     { name: "Express", level: 80, category: "Backend" },
     { name: "MongoDB", level: 75, category: "Backend" },
     { name: "Python", level: 70, category: "Backend" },
+    { name: "Django", level: 75, category: "Backend" },
+    { name: "PHP Laravel", level: 80, category: "Backend" },
+    { name: "PostgreSQL", level: 85, category: "Backend" },
     { name: "Git", level: 90, category: "Tools" },
     { name: "GitHub", level: 90, category: "Tools" },
     { name: "Docker", level: 65, category: "Tools" },
@@ -95,55 +98,95 @@ export const skillsData = [
 ];
 
 export const statsData = [
-    { value: "10+", label: { fr: "Projets réalisés", en: "Projects Completed" } },
-    { value: "3+", label: { fr: "Ans d'expérience", en: "Years Experience" } },
-    { value: "5+", label: { fr: "Clients satisfaits", en: "Happy Clients" } },
-    { value: "100%", label: { fr: "Satisfaction", en: "Client Satisfaction" } }
+    { 
+        value: "03", 
+        unit: "Années",
+        label: { fr: "Expérience avérée", en: "Proven experience" }, 
+        icon: "Briefcase" 
+    },
+    { 
+        value: "100", 
+        unit: "%",
+        label: { fr: "Satisfaction client", en: "Client satisfaction" }, 
+        icon: "CheckCircle" 
+    },
+    { 
+        value: "Plus de 15", 
+        unit: "Projets",
+        label: { fr: "Nous avons terminé", en: "We have completed" }, 
+        icon: "FolderCode" 
+    },
+    { 
+        value: "24", 
+        unit: "Heures",
+        label: { fr: "Temps de réponse", en: "Response time" }, 
+        icon: "Users" 
+    }
 ];
 
 export const servicesData = {
     fr: [
         {
-            title: "Création de sites web",
-            description: "Conception de sites vitrines et e-commerce modernes, responsives et optimisés.",
-            icon: "Globe"
+            title: "Équipes",
+            description: "Je vous accompagne dans la constitution et la coordination d'équipes techniques pour mener à bien vos projets complexes.",
+            icon: "Users"
         },
         {
-            title: "Développement d’applications",
-            description: "Création d'applications web complexes et performantes avec les dernières stacks.",
-            icon: "Smartphone"
+            title: "Commencer",
+            description: "Vous avez une idée ? Je vous aide à la structurer et à poser les bases solides pour transformer votre concept en produit réel.",
+            icon: "Rocket"
         },
         {
-            title: "Maintenance et support",
-            description: "Surveillance, mise à jour et optimisation continue de votre infrastructure web.",
-            icon: "Settings"
+            title: "Développer",
+            description: "Développement full-stack de haute qualité, utilisant les technologies les plus modernes pour créer des solutions robustes.",
+            icon: "Code2"
         },
         {
-            title: "Intégration de paiement",
-            description: "Mise en place de solutions sécurisées (Orange Money, Stripe, PayPal).",
-            icon: "CreditCard"
+            title: "Intégrations",
+            description: "Intégration d'outils tiers (API, Marketing, Paiements) pour connecter et automatiser vos processus métier.",
+            icon: "Layers"
+        },
+        {
+            title: "Visualisation des données",
+            description: "Mise en place de tableaux de bord et d'outils d'analyse pour transformer vos données en informations exploitables.",
+            icon: "BarChart3"
+        },
+        {
+            title: "Commercialisation",
+            description: "Accompagnement technique pour optimiser le lancement et la croissance de votre produit sur le marché.",
+            icon: "TrendingUp"
         }
     ],
     en: [
         {
-            title: "Website Creation",
-            description: "Design of modern, responsive, and optimized showcase and e-commerce sites.",
-            icon: "Globe"
+            title: "Teams",
+            description: "I help you build and coordinate technical teams to successfully complete your complex projects.",
+            icon: "Users"
         },
         {
-            title: "App Development",
-            description: "Building complex and high-performance web applications with the latest stacks.",
-            icon: "Smartphone"
+            title: "Starting",
+            description: "Have an idea? I help you structure it and lay solid foundations to transform your concept into a real product.",
+            icon: "Rocket"
         },
         {
-            title: "Maintenance & Support",
-            description: "Monitoring, updating, and continuous optimization of your web infrastructure.",
-            icon: "Settings"
+            title: "Develop",
+            description: "High-quality full-stack development, using the most modern technologies to create robust solutions.",
+            icon: "Code2"
         },
         {
-            title: "Payment Integration",
-            description: "Implementation of secure solutions (Orange Money, Stripe, PayPal).",
-            icon: "CreditCard"
+            title: "Integrations",
+            description: "Integration of third-party tools (API, Marketing, Payments) to connect and automate your business processes.",
+            icon: "Layers"
+        },
+        {
+            title: "Data Visualization",
+            description: "Setting up dashboards and analysis tools to transform your data into actionable insights.",
+            icon: "BarChart3"
+        },
+        {
+            title: "Marketing",
+            description: "Technical guidance to optimize the launch and growth of your product in the market.",
+            icon: "TrendingUp"
         }
     ]
 };

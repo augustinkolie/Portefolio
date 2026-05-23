@@ -10,7 +10,7 @@ const Certifications = () => {
 
     return (
         <section className="py-24 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-gray-200">
                         {language === 'fr' ? 'Certifications' : 'Certifications'}
@@ -26,19 +26,19 @@ const Certifications = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="flex items-center gap-6 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-orange-500/50 transition-colors group"
+                            className="flex flex-row items-center gap-4 sm:gap-6 p-4 sm:p-6 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-orange-500/50 transition-colors group"
                         >
-                            <div className="w-16 h-16 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                                <Award className="text-orange-500" size={32} />
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                                <Award className="text-orange-500 w-6 h-6 sm:w-8 sm:h-8" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">{cert.title}</h3>
-                                <p className="text-orange-500 font-medium text-sm mb-1">{cert.issuer}</p>
-                                <p className="text-gray-500 dark:text-gray-400 text-xs">{cert.date}</p>
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-lg font-bold text-gray-800 dark:text-gray-100 truncate sm:whitespace-normal">{cert.title}</h3>
+                                <p className="text-orange-500 font-medium text-xs sm:text-sm mb-1">{cert.issuer}</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-[10px] sm:text-xs">{cert.date}</p>
                             </div>
                             <a
                                 href={cert.link}
-                                className="p-2 text-gray-400 hover:text-orange-500 transition-colors"
+                                className="p-2 text-gray-400 hover:text-orange-500 transition-colors shrink-0"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

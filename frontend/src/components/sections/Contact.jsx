@@ -52,157 +52,162 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-20 bg-white dark:bg-gray-900">
-            <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-12">
+        <section id="contact" className="relative py-24 overflow-hidden">
+            {/* Split Background as in Image 2 */}
+            <div className="absolute top-0 left-0 w-full h-1/3 bg-gray-800 dark:bg-gray-900 z-0"></div>
+            <div className="absolute bottom-0 left-0 w-full h-2/3 bg-black z-0"></div>
+            
+            <div className="container mx-auto relative z-10">
+                <div className="grid lg:grid-cols-2 gap-16 items-start">
+                    {/* Left Side - Content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
+                        className="text-white space-y-12 py-10"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                            {language === 'fr' ? 'Contactez-moi' : 'Get In Touch'}
-                        </h2>
-                        <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
-                            {language === 'fr'
-                                ? "Un projet en tête ou simplement envie de discuter ? N'hésitez pas à m'envoyer un message."
-                                : "Have a project in mind or just want to chat? Feel free to send me a message."}
-                        </p>
-
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-4">
-                                <div className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                                    <Mail size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold">Email</h4>
-                                    <p className="text-gray-600 dark:text-gray-400">{contactInfo.email}</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                                    <Phone size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold">{language === 'fr' ? 'Téléphone' : 'Phone'}</h4>
-                                    <p className="text-gray-600 dark:text-gray-400">{contactInfo.phone}</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                                    <MapPin size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold">{language === 'fr' ? 'Adresse' : 'Location'}</h4>
-                                    <p className="text-gray-600 dark:text-gray-400">{contactInfo.address}</p>
-                                </div>
-                            </div>
+                        <div className="space-y-8">
+                            <h2 className="text-4xl md:text-6xl font-bold leading-tight">
+                                {language === 'fr' ? 'Collaborons pour bâtir votre prochaine solution digitale' : 'Let\'s collaborate to build your next digital solution'}
+                            </h2>
+                            <p className="text-xl text-gray-300 leading-relaxed max-w-xl">
+                                {language === 'fr' 
+                                    ? "Projetez-vous de lancer une application ou d'optimiser votre présence en ligne ? Discutons-en pour transformer vos idées en réalité."
+                                    : "Thinking about launching an app or optimizing your online presence? Let's talk to turn your ideas into reality."}
+                            </p>
                         </div>
 
-                        <div className="mt-12 h-64 rounded-2xl overflow-hidden shadow-lg">
-                            <iframe
-                                title="Map"
-                                src="https://maps.google.com/maps?q=Boma,Nzerekore,Guinea&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen=""
-                                loading="lazy"
-                            ></iframe>
+                        <div className="text-2xl font-bold">
+                            {language === 'fr' ? 'Appelez-moi au :' : 'Call me at:'} <span className="text-orange-500">{contactInfo.phone}</span>
+                        </div>
+
+                        <div className="space-y-6">
+                            <h3 className="text-xl font-bold uppercase tracking-widest text-gray-400">
+                                {language === 'fr' ? 'Mes avantages :' : 'My advantages:'}
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+                                {[
+                                    { fr: "orienté client", en: "client oriented" },
+                                    { fr: "Axé sur les résultats", en: "result oriented" },
+                                    { fr: "Indépendant", en: "independent" },
+                                    { fr: "Résolution de problèmes", en: "problem solving" },
+                                    { fr: "Compétent", en: "competent" },
+                                    { fr: "Transparent", en: "transparent" }
+                                ].map((adv, i) => (
+                                    <div key={i} className="flex items-center gap-3">
+                                        <div className="w-5 h-5 rounded-full border-2 border-red-500 flex items-center justify-center">
+                                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                                        </div>
+                                        <span className="text-lg text-gray-200 capitalize">{adv[language]}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </motion.div>
 
+                    {/* Right Side - Floating Form Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-gray-50 dark:bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700"
+                        className="bg-white rounded-lg shadow-2xl p-8 md:p-12"
                     >
+                        <div className="text-center mb-10">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                                {language === 'fr' ? 'Contactez-nous' : 'Contact Us'}
+                            </h3>
+                            <div className="flex justify-center">
+                                <Mail className="text-gray-400" size={32} />
+                            </div>
+                        </div>
+
                         <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Prénom' : 'First Name'}</label>
+                                    <input
+                                        type="text"
+                                        name="user_name"
+                                        required
+                                        className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Nom de famille' : 'Last Name'}</label>
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        required
+                                        className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
+                                    />
+                                </div>
+                            </div>
+
                             <div>
-                                <label className="block text-sm font-medium mb-2">{language === 'fr' ? 'Nom' : 'Name'}</label>
+                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Entreprise / Organisation' : 'Company / Organization'}</label>
                                 <input
                                     type="text"
-                                    name="user_name"
-                                    required
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                    placeholder="Augustin Kolié"
+                                    name="company"
+                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
                                 />
                             </div>
+
                             <div>
-                                <label className="block text-sm font-medium mb-2">Email</label>
+                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">E-mail</label>
                                 <input
                                     type="email"
                                     name="user_email"
                                     required
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                    placeholder="augustinkolie54@gmail.com"
+                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
                                 />
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">{language === 'fr' ? 'Téléphone' : 'Phone'}</label>
-                                    <input
-                                        type="tel"
-                                        name="user_phone"
-                                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                        placeholder="+224 ..."
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">{language === 'fr' ? 'Sujet' : 'Subject'}</label>
-                                    <input
-                                        type="text"
-                                        name="subject"
-                                        required
-                                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                        placeholder={language === 'fr' ? "Objet de votre message" : "Subject of your message"}
-                                    />
-                                </div>
-                            </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2">Message</label>
+                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Téléphone' : 'Phone'}</label>
+                                <input
+                                    type="tel"
+                                    name="user_phone"
+                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">{language === 'fr' ? 'Comment pouvons-nous vous aider ?' : 'How can we help you?'}</label>
+                                <select 
+                                    name="help_type"
+                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800 bg-white"
+                                >
+                                    <option value="">{language === 'fr' ? 'Sélectionnez une option' : 'Select an option'}</option>
+                                    <option value="dev">{language === 'fr' ? 'Développement Web' : 'Web Development'}</option>
+                                    <option value="consult">{language === 'fr' ? 'Consultation Tech' : 'Tech Consultation'}</option>
+                                    <option value="other">{language === 'fr' ? 'Autre' : 'Other'}</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Message</label>
                                 <textarea
                                     name="message"
                                     required
                                     rows="4"
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none transition-all"
-                                    placeholder={language === 'fr' ? "Votre message..." : "Your message..."}
+                                    className="w-full px-4 py-3 rounded border border-gray-200 focus:border-red-500 outline-none transition-colors text-gray-800 resize-none"
+                                    placeholder={language === 'fr' ? "Pour mieux vous aider, veuillez décrire comment nous pouvons vous aider..." : "To better help you, please describe how we can help you..."}
                                 ></textarea>
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={status === 'sending'}
-                                className="w-full py-4 bg-primary text-white rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded shadow-lg transition-all disabled:opacity-70"
                             >
-                                {status === 'sending' ? (
-                                    language === 'fr' ? 'Envoi en cours...' : 'Sending...'
-                                ) : status === 'success' ? (
-                                    language === 'fr' ? '✓ Envoyé !' : '✓ Sent!'
-                                ) : (
-                                    <>
-                                        {language === 'fr' ? 'Envoyer' : 'Send Message'}
-                                        <Send size={20} />
-                                    </>
-                                )}
+                                {status === 'sending' ? (language === 'fr' ? 'ENVOI EN COURS...' : 'SENDING...') : (language === 'fr' ? 'ENVOYER' : 'SEND')}
                             </button>
 
-                            {/* Error Message Display */}
-                            {status === 'error' && errorMessage && (
-                                <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
-                                    {errorMessage}
-                                </div>
-                            )}
-
-                            {/* Success Message Display */}
                             {status === 'success' && (
-                                <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-600 dark:text-green-400 text-sm">
-                                    {language === 'fr'
-                                        ? '✓ Votre message a été envoyé avec succès !'
-                                        : '✓ Your message has been sent successfully!'}
-                                </div>
+                                <p className="text-green-600 text-center font-bold">{language === 'fr' ? '✓ Message envoyé !' : '✓ Message sent!'}</p>
+                            )}
+                            {status === 'error' && (
+                                <p className="text-red-600 text-center font-bold">{errorMessage}</p>
                             )}
                         </form>
                     </motion.div>

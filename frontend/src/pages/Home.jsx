@@ -8,9 +8,6 @@ import Experience from '../components/sections/Experience';
 import Projects from '../components/sections/Projects';
 import Education from '../components/sections/Education';
 import Certifications from '../components/sections/Certifications';
-import BlogPreview from '../components/sections/BlogPreview';
-import Testimonials from '../components/sections/Testimonials';
-import FAQ from '../components/sections/FAQ';
 import Contact from '../components/sections/Contact';
 
 const Home = () => {
@@ -25,9 +22,6 @@ const Home = () => {
             <Experience />
             <Education />
             <Certifications />
-            <BlogPreview />
-            <Testimonials />
-            <FAQ />
             <Contact />
         </div>
     );

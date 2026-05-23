@@ -41,9 +41,14 @@ const Navbar = () => {
                     : "bg-transparent py-6"
             )}
         >
-            <div className="container mx-auto px-6 flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                    Portfolio.
+            <div className="container mx-auto flex justify-between items-center">
+                <Link to="/" className="flex items-center gap-3 group">
+                    <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-orange-500/20 group-hover:scale-110 transition-transform duration-300">
+                        P
+                    </div>
+                    <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                        Portfolio.
+                    </span>
                 </Link>
 
                 {/* Desktop Menu */}
@@ -98,16 +103,26 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Menu Button */}
-                <div className="md:hidden flex items-center gap-4">
+                <div className="md:hidden flex items-center gap-2 sm:gap-4">
                     <button
                         onClick={toggleTheme}
-                        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className={cn(
+                            "p-2 rounded-full transition-colors",
+                            scrolled 
+                                ? "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300" 
+                                : "text-white hover:bg-white/10"
+                        )}
                     >
                         {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className={cn(
+                            "p-2 rounded-md transition-colors",
+                            scrolled
+                                ? "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
+                                : "text-white hover:bg-white/10"
+                        )}
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
@@ -121,25 +136,30 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800"
+                        className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 shadow-xl"
                     >
-                        <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                        <div className="container mx-auto px-6 py-6 flex flex-col space-y-5">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.path}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
+                                    className="text-lg font-bold text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors flex justify-between items-center"
                                 >
                                     {link.name}
+                                    <Globe size={16} className="opacity-20" />
                                 </a>
                             ))}
+                            <div className="h-px bg-gray-100 dark:bg-gray-800 my-2"></div>
                             <button
-                                onClick={() => switchLanguage(language === "fr" ? "en" : "fr")}
-                                className="flex items-center gap-2 text-lg font-medium text-gray-700 dark:text-gray-300"
+                                onClick={() => {
+                                    switchLanguage(language === "fr" ? "en" : "fr");
+                                    setIsOpen(false);
+                                }}
+                                className="flex items-center gap-3 text-lg font-bold text-primary"
                             >
                                 <Globe size={20} />
-                                <span>Switch to {language === "fr" ? "English" : "Français"}</span>
+                                <span>{language === "fr" ? "Switch to English" : "Passer en Français"}</span>
                             </button>
                         </div>
                     </motion.div>

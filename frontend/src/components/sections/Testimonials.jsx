@@ -35,7 +35,7 @@ const Testimonials = () => {
                 <div className="absolute inset-0 bg-black/60"></div>
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ const Testimonials = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -100 }}
                             transition={{ duration: 0.5 }}
-                            className="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-white/10"
+                            className="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-xl border border-white/10"
                         >
                             <div className="flex flex-col items-center text-center">
                                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 shadow-lg shadow-primary/30">

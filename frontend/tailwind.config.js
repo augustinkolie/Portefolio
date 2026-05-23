@@ -6,6 +6,16 @@ export default {
     ],
     darkMode: 'class',
     theme: {
+        container: {
+            center: true,
+            padding: {
+                DEFAULT: '1rem',
+                sm: '2rem',
+                lg: '4rem',
+                xl: '6rem',
+                '2xl': '8rem',
+            },
+        },
         extend: {
             colors: {
                 primary: "var(--primary)",
@@ -14,7 +24,8 @@ export default {
                 foreground: "var(--foreground)",
             },
             fontFamily: {
-                sans: ['Nunito', 'sans-serif'],
+                sans: ['Inter', 'sans-serif'],
+                heading: ['Outfit', 'sans-serif'],
             },
         },
     },

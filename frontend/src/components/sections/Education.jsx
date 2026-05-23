@@ -10,7 +10,7 @@ const Education = () => {
 
     return (
         <section id="education" className="py-24 bg-white dark:bg-gray-900 overflow-hidden">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -37,11 +37,11 @@ const Education = () => {
                             className="group relative"
                         >
                             {/* Card with Glassmorphism Effect */}
-                            <div className="relative z-10 bg-gray-50 dark:bg-gray-800/40 backdrop-blur-md p-8 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2">
+                            <div className="relative z-10 bg-gray-50 dark:bg-gray-800/40 backdrop-blur-md p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2">
                                 <div className="flex flex-col gap-6">
                                     <div className="flex items-start justify-between">
-                                        <div className="p-4 bg-orange-500/10 rounded-2xl text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
-                                            <GraduationCap size={32} />
+                                        <div className="p-3 bg-orange-500/10 rounded-xl text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
+                                            <GraduationCap size={24} />
                                         </div>
                                         <div className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-700/50 px-4 py-2 rounded-full border border-gray-100 dark:border-gray-600">
                                             <Calendar size={16} className="text-orange-500" />
@@ -64,7 +64,7 @@ const Education = () => {
                                 </div>
 
                                 {/* Animated Accent Line */}
-                                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-b-3xl transition-all duration-500 group-hover:w-full"></div>
+                                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-b-xl transition-all duration-500 group-hover:w-full"></div>
                             </div>
                         </motion.div>
                     ))}

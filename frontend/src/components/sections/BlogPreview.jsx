@@ -22,7 +22,7 @@ const BlogModal = ({ post, isOpen, onClose, language }) => (
                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                    className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+                    className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl flex flex-col"
                 >
                     {/* Close Button */}
                     <button
@@ -71,7 +71,7 @@ const BlogModal = ({ post, isOpen, onClose, language }) => (
                             </p>
 
                             {/* Visual placeholders for more content */}
-                            <div className="mt-8 p-6 bg-orange-50 dark:bg-orange-900/10 rounded-2xl border border-orange-100 dark:border-orange-900/20">
+                            <div className="mt-8 p-6 bg-orange-50 dark:bg-orange-900/10 rounded-lg border border-orange-100 dark:border-orange-900/20">
                                 <h4 className="text-orange-900 dark:text-orange-400 font-bold mb-2">
                                     {language === 'fr' ? 'Points clés :' : 'Key takeaways:'}
                                 </h4>
@@ -96,7 +96,7 @@ const BlogPreview = () => {
 
     return (
         <section id="blog" className="py-24 bg-gray-50 dark:bg-gray-800/50">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-gray-200">
                         {language === 'fr' ? 'Blog & Articles' : 'Blog & Articles'}
@@ -112,35 +112,35 @@ const BlogPreview = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+                            className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer"
                             onClick={() => setSelectedPost(post)}
                         >
-                            <div className="relative h-64 overflow-hidden">
+                            <div className="relative h-48 overflow-hidden">
                                 <img
                                     src={post.image}
                                     alt={post.title}
                                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                 />
-                                <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+                                <div className="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                                     {post.date}
                                 </div>
                             </div>
-                            <div className="p-8">
-                                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-100 group-hover:text-orange-500 transition-colors">
+                            <div className="p-5">
+                                <h3 className="text-lg font-bold mb-2 text-gray-800 dark:text-gray-100 group-hover:text-orange-500 transition-colors">
                                     {post.title}
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed line-clamp-2">
+                                <p className="text-gray-600 dark:text-gray-400 text-xs mb-4 leading-relaxed line-clamp-2">
                                     {post.excerpt}
                                 </p>
                                 <button
-                                    className="flex items-center gap-2 text-orange-500 font-bold hover:gap-4 transition-all"
+                                    className="flex items-center gap-1.5 text-orange-500 text-sm font-bold hover:gap-3 transition-all"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         setSelectedPost(post);
                                     }}
                                 >
                                     {language === 'fr' ? 'Lire la suite' : 'Read more'}
-                                    <ArrowRight size={18} />
+                                    <ArrowRight size={14} />
                                 </button>
                             </div>
                         </motion.div>

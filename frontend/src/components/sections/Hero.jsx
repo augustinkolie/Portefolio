@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { heroSlides } from '../../data/portfolio';
-import bgImage from '../../assets/images/testimonials-bg.png';
+import bgImage from '../../assets/images/hero-bg-perfect.png';
 
 const Hero = () => {
     const { language } = useLanguage();
@@ -34,10 +34,22 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
             </div>
 
-            <div className="container mx-auto px-6 relative z-10 pt-20">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="text-white flex flex-col justify-center">
-                        <div className="min-h-[280px]"> {/* Fixed height container to prevent layout jumping */}
+            <div className="container mx-auto relative z-10 pt-24 pb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Image for mobile - shown first */}
+                    <div className="lg:hidden flex justify-center order-first mb-8">
+                        <div className="relative w-64 h-64 sm:w-80 sm:h-80">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-primary to-purple-500 rounded-full opacity-20 blur-2xl animate-pulse"></div>
+                            <img
+                                src="/Augustin.jpg"
+                                alt="Augustin Kolié"
+                                className="relative w-full h-full rounded-full shadow-xl object-cover object-top border-4 border-white/10 z-10"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="text-white flex flex-col justify-center items-start text-left">
+                        <div className="min-h-[200px] sm:min-h-[280px]"> {/* Adjusted height for mobile */}
                             <AnimatePresence mode='wait'>
                                 <motion.div
                                     key={currentIndex}
@@ -52,11 +64,11 @@ const Hero = () => {
                                         {heroSlides[currentIndex].title[language]}
                                     </motion.span>
 
-                                    <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
                                         {heroSlides[currentIndex].subtitle[language]}
                                     </h1>
 
-                                    <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-lg">
+                                    <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-lg">
                                         {heroSlides[currentIndex].description[language]}
                                     </p>
                                 </motion.div>
@@ -66,34 +78,27 @@ const Hero = () => {
                         {/* Static Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-8">
                             <a
-                                href="#contact"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-medium shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all hover:scale-105 active:scale-95"
-                            >
-                                {language === 'fr' ? 'Contactez-nous' : 'Contact Us'}
-                                <ArrowRight size={20} />
-                            </a>
-                            <a
                                 href="/cv.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white rounded-full font-medium hover:bg-white/10 transition-all backdrop-blur-sm hover:scale-105 active:scale-95"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white rounded-full font-medium hover:bg-white/10 transition-all backdrop-blur-sm hover:scale-105 active:scale-95 text-center"
                             >
                                 {language === 'fr' ? 'Télécharger CV' : 'Download CV'}
                             </a>
                         </div>
                     </div>
 
-                    {/* Static Image with Orbiting Icons */}
-                    <div className="relative hidden md:flex items-center justify-center">
+                    {/* Image for Desktop */}
+                    <div className="relative hidden lg:flex items-center justify-center">
                         <div className="relative w-full max-w-xl aspect-square flex items-center justify-center"> {/* Increased container size */}
                             {/* Animated Background Blob */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-purple-500 rounded-full opacity-20 blur-3xl animate-pulse"></div>
 
                             {/* Central Image */}
                             <img
-                                src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=800"
-                                alt="Profile"
-                                className="relative w-80 h-80 rounded-full shadow-2xl object-cover border-4 border-white/10 z-10"
+                                src="/Augustin.jpg"
+                                alt="Augustin Kolié"
+                                className="relative w-80 h-80 rounded-full shadow-2xl object-cover object-top border-4 border-white/10 z-10"
                             />
 
                             {/* Orbiting Icons */}
@@ -138,16 +143,16 @@ const Hero = () => {
                 {/* Navigation Controls */}
                 <button
                     onClick={prevSlide}
-                    className="absolute top-1/2 left-4 md:left-8 transform -translate-y-1/2 p-4 rounded-full bg-white/10 hover:bg-primary text-white transition-all backdrop-blur-sm border border-white/10 z-20 group"
+                    className="absolute top-1/2 left-4 md:left-8 transform -translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-primary text-white transition-all backdrop-blur-sm border border-white/10 z-20 group"
                 >
-                    <ChevronLeft size={32} className="group-hover:scale-110 transition-transform" />
+                    <ChevronLeft size={20} className="sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
                 </button>
 
                 <button
                     onClick={nextSlide}
-                    className="absolute top-1/2 right-4 md:right-8 transform -translate-y-1/2 p-4 rounded-full bg-white/10 hover:bg-primary text-white transition-all backdrop-blur-sm border border-white/10 z-20 group"
+                    className="absolute top-1/2 right-4 md:right-8 transform -translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-primary text-white transition-all backdrop-blur-sm border border-white/10 z-20 group"
                 >
-                    <ChevronRight size={32} className="group-hover:scale-110 transition-transform" />
+                    <ChevronRight size={20} className="sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
                 </button>
 
                 {/* Bottom Dots */}
